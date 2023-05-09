@@ -1,0 +1,50 @@
+.loginAndRegister {
+    background-image: url("../../assets/images/Login.png");
+    background-size: 100%;
+    background-repeat: no-repeat;
+    text-align: center;
+
+    h1 {
+        font-family: "Source Sans Pro Bold";
+        padding-top: 30%;
+        color: #4a503d;
+        margin-bottom: 20%;
+        letter-spacing: 0.06em;
+        font-size: 2rem;
+    }
+
+    form {
+        input {
+            display: block;
+            width: 90%;
+            margin: auto;
+            border: 1px solid #e28f83;
+            padding: 5%;
+            border-radius: 40px;
+            margin-bottom: 5%;
+            text-align: center;
+            font-family: "Source Sans Pro Regular";
+            letter-spacing: 0.05em;
+            font-size: 1rem;
+        }
+
+        input:focus {
+            border: 2px solid #e1a49b;
+            outline: #e1a39a;
+        }
+    }
+
+    p {
+        font-family: "Source Sans Pro Regular";
+        color: #a1a4b2;
+        padding: 0 10%;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+
+        a {
+            color: #e28f83;
+            text-transform: uppercase;
+            text-decoration: none;
+        }
+    }
+}
