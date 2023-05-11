@@ -26,12 +26,10 @@ function App() {
         );
         const data = await response.json();
         if (response.ok) {
-          console.log(data);
           setUser(data);
 
           history.back();
         } else {
-          console.log(data);
           setUser(data);
           throw new Error("Authentification faild");
         }
