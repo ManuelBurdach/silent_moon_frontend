@@ -16,15 +16,11 @@
         }
 
         p {
-            font-family: "Source Sans Pro Regular";
-            color: #a1a4b2;
             padding: 0 10%;
-            letter-spacing: 0.05em;
 
             a {
                 color: #e28f83;
                 text-transform: uppercase;
-                text-decoration: none;
             }
         }
 
@@ -33,7 +29,6 @@
         }
 
         p:last-of-type {
-            text-transform: uppercase;
             margin: 10% 0;
         }
     }

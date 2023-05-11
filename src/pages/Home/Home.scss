@@ -1,0 +1,44 @@
+#home {
+    overflow: scroll;
+
+    h2,
+    h3 {
+        margin-bottom: 2%;
+    }
+
+    .homeHeader {
+        padding: 20% 5% 5% 5%;
+    }
+
+    .homeVideos {
+        padding: 10% 5% 10% 5%;
+
+        h2 {
+            margin-bottom: 5%;
+        }
+
+        div {
+            display: flex;
+            gap: 20px;
+
+            video {
+                width: 35vw;
+                height: 13vh;
+                object-fit: cover;
+                border-radius: 10px;
+            }
+
+            h3 {
+                font-size: 1rem;
+            }
+
+            div {
+                justify-content: space-between;
+
+                p {
+                    font-size: 0.7rem;
+                }
+            }
+        }
+    }
+}

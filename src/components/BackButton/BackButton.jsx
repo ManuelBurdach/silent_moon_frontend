@@ -1,15 +1,15 @@
 import { useNavigate } from "react-router-dom";
 import "./BackButton.scss";
-import BackButtonImage from "../../assets/images/BackButton.png";
 
-const BackButton = () => {
+const BackButton = ({ addClass }) => {
     const navigate = useNavigate();
 
     return (
-        <button onClick={() => navigate(-1)}>
-            {" "}
-            <img src={BackButtonImage} alt="arrow back" />{" "}
-        </button>
+        <button
+            onClick={() => navigate(-1)}
+            id="backButton"
+            className={addClass}
+        ></button>
     );
 };
 

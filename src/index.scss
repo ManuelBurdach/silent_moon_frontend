@@ -48,3 +48,31 @@
     text-decoration: none;
     border-radius: 40px;
 }
+
+.heading1 {
+    font-family: "Source Sans Pro Bold";
+    color: #4a503d;
+    letter-spacing: 0.06em;
+    font-size: 2rem;
+}
+
+.heading2 {
+    font-family: "Source Sans Pro Bold";
+    letter-spacing: 0.06em;
+    color: #4a503d;
+    font-size: 1.3rem;
+}
+
+.textSmall {
+    font-family: "Source Sans Pro Regular";
+    color: #a1a4b2;
+    letter-spacing: 0.05em;
+}
+
+.textSmall.uppercase {
+    text-transform: uppercase;
+}
+
+a {
+    text-decoration: none;
+}

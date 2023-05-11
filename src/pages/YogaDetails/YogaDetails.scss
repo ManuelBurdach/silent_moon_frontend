@@ -1,0 +1,73 @@
+#yogaDetails {
+    .yogaVideo {
+        height: 60vh;
+        margin-bottom: 10%;
+
+        video {
+            width: 100%;
+            height: 100%;
+            border: none;
+            object-fit: cover;
+            border-radius: 0 0 10px 10px;
+        }
+
+        button {
+            position: absolute;
+            top: 24%;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0);
+            border: none;
+
+            img {
+                width: 60px;
+                height: 60px;
+                object-fit: contain;
+            }
+        }
+    }
+
+    .yogaDetails {
+        padding: 0 5%;
+
+        h1 {
+            margin-bottom: 3%;
+        }
+
+        .textSmall {
+            margin-bottom: 2%;
+        }
+
+        div {
+            display: flex;
+            gap: 15%;
+            padding: 7% 0;
+
+            .yogaFavoritesAndViews {
+                position: relative;
+                padding-left: 25px;
+            }
+
+            .yogaFavoritesAndViews::before {
+                content: "";
+                position: absolute;
+                top: -3px;
+                left: 0;
+                height: 30px;
+                width: 20px;
+                background-repeat: no-repeat;
+                background-position: center;
+                background-size: contain;
+            }
+
+            .yogaFavorites::before {
+                background-image: url(../../assets/images/LikeCount.png);
+            }
+
+            .yogaViews::before {
+                background-image: url(../../assets/images/ViewsCount.png);
+            }
+        }
+    }
+}

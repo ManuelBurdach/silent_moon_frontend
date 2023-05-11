@@ -5,12 +5,7 @@
     text-align: center;
 
     h1 {
-        font-family: "Source Sans Pro Bold";
-        padding-top: 30%;
-        color: #4a503d;
-        margin-bottom: 20%;
-        letter-spacing: 0.06em;
-        font-size: 2rem;
+        padding: 30% 0 20% 0;
     }
 
     form {
@@ -35,16 +30,11 @@
     }
 
     p {
-        font-family: "Source Sans Pro Regular";
-        color: #a1a4b2;
         padding: 0 10%;
-        letter-spacing: 0.05em;
-        text-transform: uppercase;
 
         a {
             color: #e28f83;
             text-transform: uppercase;
-            text-decoration: none;
         }
     }
 }
