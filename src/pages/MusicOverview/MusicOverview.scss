@@ -1,0 +1,78 @@
+#musicOverview {
+    padding-top: 20%;
+    text-align: center;
+
+    h1 {
+        margin-bottom: 3%;
+    }
+
+    .textSmall.uppercase {
+        margin-bottom: 3%;
+    }
+
+    .likesAndSongs {
+        display: flex;
+        gap: 12%;
+        padding: 9% 0;
+        justify-content: center;
+
+        .musicFavoritesAndViews {
+            position: relative;
+            padding-left: 25px;
+        }
+
+        .musicFavoritesAndViews::before {
+            content: "";
+            position: absolute;
+            top: -3px;
+            left: -5px;
+            height: 30px;
+            width: 20px;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: contain;
+        }
+
+        .musicFavorites::before {
+            background-image: url(../../assets/images/LikeCount.png);
+        }
+
+        .musicViews::before {
+            background-image: url(../../assets/images/SongsIcon.png);
+        }
+    }
+
+    .allSongs {
+        padding-bottom: 25%;
+
+        div {
+            position: relative;
+            text-align: left;
+            padding: 4% 0 4% 13%;
+            margin: 0 7%;
+            border-bottom: 1px solid #adb8d929;
+
+            h3 {
+                font-size: 0.9rem;
+                color: #3f414ed8;
+            }
+
+            p {
+                font-size: 0.8rem;
+            }
+        }
+
+        div::before {
+            content: "";
+            position: absolute;
+            top: 18px;
+            left: 0;
+            height: 35px;
+            width: 35px;
+            background-image: url(../../assets/images/MusicPlayIcon.png);
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: contain;
+        }
+    }
+}
