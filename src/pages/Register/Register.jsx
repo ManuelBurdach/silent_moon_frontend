@@ -1,10 +1,12 @@
-import { useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import { useRef, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 import BackButton from "../../components/BackButton/BackButton";
 import { userState } from "../../state/userState";
 
 const Register = () => {
+    const [hintText, setHintText] = useState("");
+
     const nameRegisterRef = useRef();
     const surnameRegisterRef = useRef();
     const emailRegisterRef = useRef();
@@ -45,7 +47,7 @@ const Register = () => {
                 setUser(response);
                 navigate("/welcome");
             } else if (result.status === 550) {
-                //Hinweis ins frontend
+                setHintText("User already exists");
                 console.log("Error: email existiert bereits");
             } else {
                 console.log("Error: Server error");
@@ -93,12 +95,16 @@ const Register = () => {
                     placeholder="PASSWORD"
                     required
                 />
+                {hintText && <p className="textSmall hinttext">{hintText}</p>}
                 <input
                     type="submit"
                     value="REGISTER"
                     className="bigRedButton"
                 />
             </form>
+            <p className="textSmall uppercase">
+                Already have an account? <Link to="/login">Log in</Link>
+            </p>
         </section>
     );
 };
