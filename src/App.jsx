@@ -9,6 +9,7 @@ import ProtectRoutes from "./components/ProtectRoutes/ProtectRoutes";
 import Home from "./pages/Home/Home";
 import YogaDetails from "./pages/YogaDetails/YogaDetails";
 import YogaOverview from "./pages/YogaOverview/YogaOverview";
+import MusicOverview from "./pages/MusicOverview/MusicOverview";
 
 function App() {
     return (
@@ -20,6 +21,7 @@ function App() {
                     <Route path="/register" element={<Register />} />
                     <Route path="/home" element={<Home />} />
                     <Route path="/yoga" element={<YogaOverview />} />
+                    <Route path="/music" element={<MusicOverview />} />
                     <Route
                         path="/yogadetails/:videoId"
                         element={<YogaDetails />}
