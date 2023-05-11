@@ -10,23 +10,65 @@
     display: flex;
     justify-content: space-between;
 
-    div,
     a {
         width: 20%;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-
-        img {
-            width: 35%;
-            height: 35%;
-            object-fit: contain;
-            margin-bottom: 15%;
-        }
+        text-align: center;
+        background-repeat: no-repeat;
+        background-size: 30%;
+        background-position: center 30%;
+        padding-top: 12%;
 
         p {
             font-size: 0.7rem;
+        }
+    }
+
+    a:first-of-type {
+        background-image: url(../../assets/images/NavYoga.png);
+    }
+
+    a:nth-of-type(2) {
+        background-image: url(../../assets/images/NavMeditate.png);
+    }
+
+    a:nth-of-type(3) {
+        background-image: url(../../assets/images/NavHome.png);
+    }
+
+    a:nth-of-type(4) {
+        background-image: url(../../assets/images/NavMusic.png);
+    }
+
+    a:nth-of-type(5) {
+        background-image: url(../../assets/images/NavProfile.png);
+    }
+
+    a:first-of-type.active {
+        background-image: url(../../assets/images/NavYogaActive.png);
+    }
+
+    a:nth-of-type(2).active {
+        background-image: url(../../assets/images/NavMeditateActive.png);
+    }
+
+    a:nth-of-type(3).active {
+        background-image: url(../../assets/images/NavHomeActive.png);
+    }
+
+    a:nth-of-type(4).active {
+        background-image: url(../../assets/images/NavMusicActive.png);
+    }
+
+    a:nth-of-type(5).active {
+        background-image: url(../../assets/images/NavProfileActive.png);
+    }
+
+    .active {
+        background-size: 53%;
+        background-position: center 0%;
+
+        p {
+            color: #e28f83;
         }
     }
 }

@@ -1,11 +1,13 @@
 import "./Login.scss";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import BackButton from "../../components/BackButton/BackButton";
 import { userState } from "../../state/userState";
 
 const Login = () => {
+    const [hintText, setHintText] = useState("");
+
     const navigate = useNavigate();
 
     const userLoginRef = useRef();
@@ -43,7 +45,7 @@ const Login = () => {
                 setUser(response);
                 navigate("/home"); //auf home weiterleiten
             } else if (result.status === 401) {
-                //Hinweis ins frontend
+                setHintText("Invalid email or password");
                 console.log("Error: Userlogindaten fehlerhaft");
             } else {
                 console.log("Error: Server error");
@@ -74,6 +76,7 @@ const Login = () => {
                     placeholder="PASSWORD"
                     required
                 />
+                {hintText && <p className="textSmall hinttext">{hintText}</p>}
                 <input type="submit" value="LOGIN" className="bigRedButton" />
             </form>
             <p className="textSmall uppercase">
