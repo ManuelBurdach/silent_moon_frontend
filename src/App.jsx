@@ -13,6 +13,7 @@ import MusicOverview from "./pages/MusicOverview/MusicOverview";
 
 import { userState } from "./state/userState";
 import { useEffect } from "react";
+import Reminder from "./pages/Reminder/Reminder";
 
 function App() {
   const setUser = userState((state) => state.setUser);
@@ -50,6 +51,7 @@ function App() {
 
         <Route element={<ProtectRoutes />}>
           <Route path="/welcome" element={<Welcome />} />
+          <Route path="/reminder" element={<Reminder />} />
           <Route path="/home" element={<Home />} />
           <Route path="/yoga" element={<YogaOverview />} />
           <Route path="/yogadetails/:videoId" element={<YogaDetails />} />
