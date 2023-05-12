@@ -80,7 +80,7 @@ const YogaDetails = () => {
   return (
     <section id="yogaDetails">
       <BackButton addClass="fill" />
-      <LikeButton />
+      <LikeButton selectedVideo={selectedVideo} />
       <article className="yogaVideo">
         {selectedVideo.url && (
           <video controls={false} ref={videoRef} onClick={handleVideoClick}>

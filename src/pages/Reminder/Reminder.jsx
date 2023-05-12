@@ -1,10 +1,11 @@
 import { useRef, useState } from "react";
 import { userState } from "../../state/userState";
 import "./Reminder.scss";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Reminder = () => {
   const time = useRef();
+  const timePeriod = useRef();
   const [SU, toggleSU] = useState(false);
   const [M, toggleM] = useState(true);
   const [T, toggleT] = useState(false);
@@ -13,32 +14,45 @@ const Reminder = () => {
   const [F, toggleF] = useState(true);
   const [S, toggleS] = useState(false);
 
+  const nav = useNavigate();
+
   const user = userState((state) => state.user);
+  const setUser = userState((state) => state.setUser);
 
   const saveReminders = async () => {
     try {
       const response = await fetch(
-        import.meta.env.VITE_BACKEND + import.meta.env.VITE_API_VERSION + "/user/addReminders",
+        import.meta.env.VITE_BACKEND + import.meta.env.VITE_API_VERSION + "/user/addReminder",
         {
           method: "POST",
           credentials: "include",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ time: time, su: SU, m: M, t: T, w: W, th: TH, f: F, s: S }),
+          body: JSON.stringify({
+            time: time.current.value + " " + timePeriod.current.value,
+            su: SU,
+            m: M,
+            t: T,
+            w: W,
+            th: TH,
+            f: F,
+            s: S,
+          }),
         }
       );
       if (response.ok) {
-        const data = await response.json();
-        setSelectedVideo(data);
+        // const data = await response.json();
+        // setSelectedVideo(data);
+        nav("/home");
       } else {
         const result = response.json();
         setUser(result);
         nav("/login");
-        throw new Error("Error fetching video");
+        throw new Error("Error on authorization");
       }
     } catch (error) {
-      console.error("Error fetching video:", error);
+      console.error("Error set reminder:", error);
     }
   };
 
@@ -48,8 +62,8 @@ const Reminder = () => {
       <h2>What time would you like to meditate?</h2>
       <p className="p_grey">Any time you can choose but We recommend first thing in th morning.</p>
       <form>
-        <input type="time" defaultValue={"12:00"} />
-        <select name="" id="">
+        <input type="time" defaultValue={"12:00"} ref={time} />
+        <select name="" id="" ref={timePeriod}>
           <option value="am">Am</option>
           <option value="pm">Pm</option>
         </select>
