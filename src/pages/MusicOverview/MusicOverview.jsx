@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 import "./MusicOverview.scss";
 import Navigation from "../../components/Navigation/Navigation";
 
-const CLIENT_ID = "ab15df07233441198e07735bdb853e7b";
-const CLIENT_SECRET = "7322bd6f3a6548ceaf4d2c468aa69ce1";
+const CLIENT_ID = "";
+const CLIENT_SECRET = "";
 const PLAYLIST_ID = "37i9dQZF1DWYBO1MoTDhZI";
 
 const MusicOverview = () => {
