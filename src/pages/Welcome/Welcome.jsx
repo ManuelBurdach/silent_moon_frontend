@@ -10,7 +10,7 @@ const Welcome = () => {
       <p className="logo light">SILENT MOON</p>
       <img src={WelcomeImage} alt="" />
       <h1>Hi {user.firstName}, welcome to Silent Moon</h1>
-      <Link to="/" className="bigRedButton">
+      <Link to="/reminder" className="bigRedButton">
         Get Started
       </Link>
     </section>

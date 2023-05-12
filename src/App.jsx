@@ -13,58 +13,53 @@ import MusicOverview from "./pages/MusicOverview/MusicOverview";
 
 import { userState } from "./state/userState";
 import { useEffect } from "react";
+import Reminder from "./pages/Reminder/Reminder";
 
 function App() {
-    const setUser = userState((state) => state.setUser);
+  const setUser = userState((state) => state.setUser);
 
-    useEffect(() => {
-        (async () => {
-            try {
-                const response = await fetch(
-                    import.meta.env.VITE_BACKEND +
-                        import.meta.env.VITE_API_VERSION +
-                        "/user/verify",
-                    {
-                        credentials: "include",
-                    }
-                );
-                const data = await response.json();
-                if (response.ok) {
-                    console.log(data);
-                    setUser(data);
+  useEffect(() => {
+    (async () => {
+      try {
+        const response = await fetch(
+          import.meta.env.VITE_BACKEND + import.meta.env.VITE_API_VERSION + "/user/verify",
+          {
+            credentials: "include",
+          }
+        );
+        const data = await response.json();
+        if (response.ok) {
+          setUser(data);
 
-                    history.back();
-                } else {
-                    console.log(data);
-                    setUser(data);
-                    throw new Error("Authentification faild");
-                }
-            } catch (error) {
-                console.error("Error:", error);
-            }
-        })();
-    }, []);
+          history.back();
+        } else {
+          setUser(data);
+          throw new Error("Authentification faild");
+        }
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    })();
+  }, []);
 
-    return (
-        <div className="App">
-            <Routes>
-                <Route path="/" element={<Start />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/register" element={<Register />} />
+  return (
+    <div className="App">
+      <Routes>
+        <Route path="/" element={<Start />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
 
-                <Route element={<ProtectRoutes />}>
-                    <Route path="/welcome" element={<Welcome />} />
-                    <Route path="/home" element={<Home />} />
-                    <Route path="/yoga" element={<YogaOverview />} />
-                    <Route
-                        path="/yogadetails/:videoId"
-                        element={<YogaDetails />}
-                    />
-                    <Route path="/music" element={<MusicOverview />} />
-                </Route>
-            </Routes>
-        </div>
-    );
+        <Route element={<ProtectRoutes />}>
+          <Route path="/welcome" element={<Welcome />} />
+          <Route path="/reminder" element={<Reminder />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/yoga" element={<YogaOverview />} />
+          <Route path="/yogadetails/:videoId" element={<YogaDetails />} />
+          <Route path="/music" element={<MusicOverview />} />
+        </Route>
+      </Routes>
+    </div>
+  );
 }
 
 export default App;

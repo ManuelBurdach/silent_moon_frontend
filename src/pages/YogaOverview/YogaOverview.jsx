@@ -13,6 +13,7 @@ import { userState } from "../../state/userState";
 
 const YogaOverview = () => {
   const [videos, setVideos] = useState([]);
+  const [filteredVideos, setfilteredVideos] = useState([]);
 
   const date = new Date();
   let day = date.getDate();
@@ -35,6 +36,17 @@ const YogaOverview = () => {
   const nav = useNavigate();
   const setUser = userState((state) => state.setUser);
 
+  const filterTitle = (e) => {
+    console.log(videos);
+    if (e.target.value == "") {
+      setfilteredVideos(videos);
+    } else {
+      setfilteredVideos(
+        videos.filter((video) => video.title.toLowerCase().includes(e.target.value.toLowerCase()))
+      );
+    }
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -46,6 +58,7 @@ const YogaOverview = () => {
           const data = await response.json();
           data.sort((a, b) => b.favorites - a.favorites);
           setVideos(data);
+          setfilteredVideos(data);
         } else {
           const result = response.json();
           setUser(result);
@@ -60,6 +73,17 @@ const YogaOverview = () => {
     fetchData();
   }, []);
 
+  const filterBy = (property) => {
+    if (property === "all") {
+      setfilteredVideos(videos);
+    } else if (property === "favorites") {
+    } else {
+      setfilteredVideos(
+        videos.filter((video) => video.level.toLowerCase().includes(property.toLowerCase()))
+      );
+    }
+  };
+
   return (
     <section id="yogaOverview">
       <p className="logo">SILENT MOON</p>
@@ -67,23 +91,43 @@ const YogaOverview = () => {
         <h1 className="heading1">Yoga</h1>
         <p className="textSmall">Find your inner zen from anywhere.</p>
         <div>
-          <button>
+          <button
+            onClick={() => {
+              filterBy("all");
+            }}
+          >
             <img src={FilterAll} alt="" />
             <p className="textSmall">All</p>
           </button>
-          <button>
+          <button
+            onClick={() => {
+              filterBy("favorites");
+            }}
+          >
             <img src={FilterFavorites} alt="" />
             <p className="textSmall">Favorites</p>
           </button>
-          <button>
+          <button
+            onClick={() => {
+              filterBy("beginner");
+            }}
+          >
             <img src={FilterBeginner} alt="" />
             <p className="textSmall">Beginner</p>
           </button>
-          <button>
+          <button
+            onClick={() => {
+              filterBy("intermediate");
+            }}
+          >
             <img src={FilterIntermediate} alt="" />
             <p className="textSmall">Intermediate</p>
           </button>
-          <button>
+          <button
+            onClick={() => {
+              filterBy("expert");
+            }}
+          >
             <img src={FilterExpert} alt="" />
             <p className="textSmall">Expert</p>
           </button>
@@ -91,7 +135,7 @@ const YogaOverview = () => {
       </article>
       <article className="searchAndVideos">
         <form>
-          <input type="text" />
+          <input type="text" onChange={filterTitle} />
         </form>
         <div className="dailyCalm">
           <div>
@@ -103,7 +147,7 @@ const YogaOverview = () => {
           <img src={DailyCalmPlay} alt="play button" />
         </div>
         <div className="videoList">
-          {videos.map((video) => (
+          {filteredVideos.map((video) => (
             <Link to={`/yogadetails/${video._id}`} key={video._id}>
               <video controls={false}>
                 <source src={videos.find((videoArray) => videoArray._id === video._id).url} />

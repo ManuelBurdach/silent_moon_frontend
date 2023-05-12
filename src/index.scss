@@ -1,78 +1,78 @@
 @font-face {
-    font-family: "Source Sans Pro Regular";
-    src: url(./assets/fonts/SourceSansPro-Regular.ttf);
+  font-family: "Source Sans Pro Regular";
+  src: url(./assets/fonts/SourceSansPro-Regular.ttf);
 }
 
 @font-face {
-    font-family: "Source Sans Pro Semibold";
-    src: url(./assets/fonts/SourceSansPro-SemiBold.ttf);
+  font-family: "Source Sans Pro Semibold";
+  src: url(./assets/fonts/SourceSansPro-SemiBold.ttf);
 }
 
 @font-face {
-    font-family: "Source Sans Pro Bold";
-    src: url(./assets/fonts/SourceSansPro-Bold.ttf);
+  font-family: "Source Sans Pro Bold";
+  src: url(./assets/fonts/SourceSansPro-Bold.ttf);
 }
 
 @font-face {
-    font-family: "Roboto Medium";
-    src: url(./assets/fonts/Roboto-Medium.ttf);
+  font-family: "Roboto Medium";
+  src: url(./assets/fonts/Roboto-Medium.ttf);
 }
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 .logo {
-    position: absolute;
-    top: 0;
-    width: 100%;
-    text-align: center;
-    padding: 7% 0;
-    font-family: "Source Sans Pro Semibold";
-    letter-spacing: 0.2em;
-    color: #4a503d;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  text-align: center;
+  padding: 7% 0;
+  font-family: "Source Sans Pro Semibold";
+  letter-spacing: 0.2em;
+  color: #4a503d;
 }
 
 .logo.light {
-    color: #fefcf8;
+  color: #fefcf8;
 }
 
 .bigRedButton {
-    background-color: #e28f83;
-    color: #faf2da;
-    padding: 5% 35%;
-    font-family: "Source Sans Pro Regular";
-    text-transform: uppercase;
-    text-decoration: none;
-    border-radius: 40px;
+  background-color: #e28f83;
+  color: #faf2da;
+  padding: 5% 35%;
+  font-family: "Source Sans Pro Regular";
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 40px;
 }
 
 .heading1 {
-    font-family: "Source Sans Pro Bold";
-    color: #4a503d;
-    letter-spacing: 0.06em;
-    font-size: 2rem;
+  font-family: "Source Sans Pro Bold";
+  color: #4a503d;
+  letter-spacing: 0.06em;
+  font-size: 2rem;
 }
 
 .heading2 {
-    font-family: "Source Sans Pro Bold";
-    letter-spacing: 0.06em;
-    color: #4a503d;
-    font-size: 1.3rem;
+  font-family: "Source Sans Pro Bold";
+  letter-spacing: 0.06em;
+  color: #4a503d;
+  font-size: 1.3rem;
 }
 
 .textSmall {
-    font-family: "Source Sans Pro Regular";
-    color: #a1a4b2;
-    letter-spacing: 0.05em;
+  font-family: "Source Sans Pro Regular";
+  color: #a1a4b2;
+  letter-spacing: 0.05em;
 }
 
 .textSmall.uppercase {
-    text-transform: uppercase;
+  text-transform: uppercase;
 }
 
 a {
-    text-decoration: none;
+  text-decoration: none;
 }
