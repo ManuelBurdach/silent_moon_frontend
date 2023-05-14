@@ -12,8 +12,6 @@ const spotifyApi = new SpotifyWebApi({
     clientId: CLIENT_ID,
 });
 
-const cookies = new Cookies();
-
 const MusicOverview = ({ accessToken }) => {
     const [playlist, setPlaylist] = useState(null);
     const [playingTrack, setPlayingTrack] = useState();

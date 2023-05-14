@@ -12,7 +12,6 @@ import YogaOverview from "./pages/YogaOverview/YogaOverview";
 import MeditationOverview from "./pages/MeditationOverview/MeditationOverview";
 import MeditationDetails from "./pages/MeditationDetails/MeditationDetails";
 import SpotifyStart from "./pages/spotifyStart/spotifyStart";
-import SpotifyLogin from "./pages/SpotifyLogin/SpotifyLogin";
 
 import { userState } from "./state/userState";
 import { useEffect } from "react";
@@ -54,24 +53,20 @@ function App() {
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
 
-                <Route element={<ProtectRoutes />}>
-                    <Route path="/welcome" element={<Welcome />} />
-                    <Route path="/reminder" element={<Reminder />} />
-                    <Route path="/home" element={<Home />} />
-                    <Route path="/yoga" element={<YogaOverview />} />
-                    <Route
-                        path="/yogadetails/:videoId"
-                        element={<YogaDetails />}
-                    />
-                    <Route path="/meditate" element={<MeditationOverview />} />
-                    <Route
-                        path="/meditatedetails/:playlistId"
-                        element={<MeditationDetails />}
-                    />
+                {/*  <Route element={<ProtectRoutes />}> */}
+                <Route path="/welcome" element={<Welcome />} />
+                <Route path="/reminder" element={<Reminder />} />
+                <Route path="/home" element={<Home />} />
+                <Route path="/yoga" element={<YogaOverview />} />
+                <Route path="/yogadetails/:videoId" element={<YogaDetails />} />
+                <Route path="/meditate" element={<MeditationOverview />} />
+                <Route
+                    path="/meditatedetails/:playlistId"
+                    element={<MeditationDetails />}
+                />
 
-                    <Route path="/music" element={<SpotifyStart />} />
-                    <Route path="/music/login" element={<SpotifyLogin />} />
-                </Route>
+                <Route path="/music" element={<SpotifyStart />} />
+                {/* </Route> */}
             </Routes>
         </div>
     );
