@@ -12,6 +12,11 @@ const SpotifyStart = () => {
     // der code wird von der Spotify Login Seite zurückgegeben. Wenn er hier leer bleibt wird die SpotifyLogin component gerendert
     const code = new URLSearchParams(window.location.search).get("code");
 
+    console.log("Start");
+    console.log(code);
+    console.log(accessToken);
+    console.log(loading);
+
     useEffect(() => {
         const login = async () => {
             // wenn ein code vorhandne ist, wird im backend ein access token angefordert und in den cookies gespeichert

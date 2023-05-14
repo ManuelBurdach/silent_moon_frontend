@@ -12,6 +12,7 @@ import YogaOverview from "./pages/YogaOverview/YogaOverview";
 import MeditationOverview from "./pages/MeditationOverview/MeditationOverview";
 import MeditationDetails from "./pages/MeditationDetails/MeditationDetails";
 import SpotifyStart from "./pages/spotifyStart/spotifyStart";
+import MusicOverview from "./pages/MusicOverview/MusicOverview";
 
 import { userState } from "./state/userState";
 import { useEffect } from "react";
@@ -65,7 +66,8 @@ function App() {
                     element={<MeditationDetails />}
                 />
 
-                <Route path="/music" element={<SpotifyStart />} />
+                <Route path="/music/login" element={<SpotifyStart />} />
+                <Route path="/music" element={<MusicOverview />} />
                 {/* </Route> */}
             </Routes>
         </div>
