@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import Cookies from "universal-cookie";
+
+const cookies = new Cookies();
 
 export default function useAuth(code) {
     const [accessToken, setAccessToken] = useState();
     const [refreshToken, setRefreshToken] = useState();
     const [expiresIn, setExpiresIn] = useState();
-
-    const nav = useNavigate();
 
     useEffect(() => {
         const login = async () => {
@@ -21,13 +21,22 @@ export default function useAuth(code) {
                         body: JSON.stringify({ code }),
                     }
                 );
-                const data = await response.json();
-                setAccessToken(data.accessToken);
-                setRefreshToken(data.refreshToken);
-                setExpiresIn(data.expiresIn);
-                nav("/musicoverview");
+                if (response.status === 400) {
+                    const spotifyAccessToken =
+                        cookies.get("spotifyAccessToken");
+                    setAccessToken(spotifyAccessToken);
+                } else {
+                    const data = await response.json();
+                    setAccessToken(data.accessToken);
+                    cookies.set("spotifyAccessToken", data.accessToken, {
+                        path: "/",
+                    });
+                    setRefreshToken(data.refreshToken);
+                    setExpiresIn(data.expiresIn);
+                    window.history.pushState({}, null, "/");
+                }
             } catch (error) {
-                window.location = "/";
+                console.log(error);
             }
         };
         login();
@@ -51,7 +60,7 @@ export default function useAuth(code) {
                 setAccessToken(data.accessToken);
                 setExpiresIn(data.expiresIn);
             } catch (error) {
-                window.location = "/music";
+                console.log(error);
             }
         }, (expiresIn - 60) * 1000);
         return () => clearInterval(interval);
