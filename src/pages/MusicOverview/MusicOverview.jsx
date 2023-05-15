@@ -1,18 +1,35 @@
 import { useState, useEffect } from "react";
 import "./MusicOverview.scss";
 import Navigation from "../../components/Navigation/Navigation";
+import Player from "../../components/Player/Player";
+import SpotifyWebApi from "spotify-web-api-node";
+import { useNavigate, Link } from "react-router-dom";
+import PlayButton from "../../assets/images/MusicPlayIcon.png";
+import Cookies from "universal-cookie";
 
 const CLIENT_ID = import.meta.env.VITE_SPOTIFY_CLIENT_ID;
 const CLIENT_SECRET = import.meta.env.VITE_SPOTIFY_CLIENT_SECRET;
 const PLAYLIST_ID = "37i9dQZF1DWYBO1MoTDhZI";
 
-const MusicOverview = () => {
-    /*     const [searchInput, setSearchInput] = useState(""); */
-    const [accessToken, setAccessToken] = useState("");
+const spotifyApi = new SpotifyWebApi({
+    clientId: CLIENT_ID,
+});
+
+const cookies = new Cookies();
+
+const MusicOverview = ({ accessToken }) => {
     const [playlist, setPlaylist] = useState(null);
+    const [playingTrack, setPlayingTrack] = useState();
+
+    const navigate = useNavigate();
+
+    spotifyApi.setAccessToken(accessToken);
+
+    const cookieAccessToken = cookies.get("spotifyAccessToken");
+    spotifyApi.setAccessToken(cookieAccessToken);
 
     useEffect(() => {
-        // API Access Token
+        // get basic authorization for Spotify (no access to player)
         var authParameters = {
             method: "POST",
             headers: {
@@ -28,15 +45,14 @@ const MusicOverview = () => {
         fetch("https://accounts.spotify.com/api/token", authParameters)
             .then((result) => result.json())
             .then((data) => {
-                setAccessToken(data.access_token);
                 fetchPlaylist(data.access_token);
             });
     }, []);
 
     // Fetch Playlist
-    function fetchPlaylist(accessToken) {
+    function fetchPlaylist(spotifyAuthorization) {
         const headers = {
-            Authorization: `Bearer ${accessToken}`,
+            Authorization: `Bearer ${spotifyAuthorization}`,
         };
 
         fetch(`https://api.spotify.com/v1/playlists/${PLAYLIST_ID}`, {
@@ -75,6 +91,17 @@ const MusicOverview = () => {
                     playlist.tracks &&
                     playlist.tracks.items.map((item) => (
                         <div key={item.track.id}>
+                            {accessToken || cookieAccessToken ? (
+                                <button
+                                    onClick={() => setPlayingTrack(item.track)}
+                                >
+                                    <img src={PlayButton} alt="play button" />
+                                </button>
+                            ) : (
+                                <Link to="/music/login">
+                                    <img src={PlayButton} alt="play button" />
+                                </Link>
+                            )}
                             <h3 className="heading2">{item.track.name}</h3>
                             <p className="textSmall">{`${Math.floor(
                                 item.track.duration_ms / 60000
@@ -92,6 +119,10 @@ const MusicOverview = () => {
                         </div>
                     ))}
             </article>
+            <Player
+                accessToken={accessToken || cookieAccessToken}
+                trackUri={playingTrack?.uri}
+            />
             <Navigation />
         </section>
     );

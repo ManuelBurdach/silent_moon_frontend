@@ -1,0 +1,21 @@
+#spotifyLogin {
+    padding: 5%;
+    text-align: center;
+
+    h1,
+    p,
+    a {
+        padding-bottom: 5%;
+    }
+
+    a {
+        display: block;
+        width: fit-content;
+        padding: 5%;
+        margin: auto;
+    }
+
+    a:nth-of-type(2) {
+        text-decoration: underline;
+    }
+}
