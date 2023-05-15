@@ -54,21 +54,24 @@ function App() {
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
 
-                {/*  <Route element={<ProtectRoutes />}> */}
-                <Route path="/welcome" element={<Welcome />} />
-                <Route path="/reminder" element={<Reminder />} />
-                <Route path="/home" element={<Home />} />
-                <Route path="/yoga" element={<YogaOverview />} />
-                <Route path="/yogadetails/:videoId" element={<YogaDetails />} />
-                <Route path="/meditate" element={<MeditationOverview />} />
-                <Route
-                    path="/meditatedetails/:playlistId"
-                    element={<MeditationDetails />}
-                />
+                <Route element={<ProtectRoutes />}>
+                    <Route path="/welcome" element={<Welcome />} />
+                    <Route path="/reminder" element={<Reminder />} />
+                    <Route path="/home" element={<Home />} />
+                    <Route path="/yoga" element={<YogaOverview />} />
+                    <Route
+                        path="/yogadetails/:videoId"
+                        element={<YogaDetails />}
+                    />
+                    <Route path="/meditate" element={<MeditationOverview />} />
+                    <Route
+                        path="/meditatedetails/:playlistId"
+                        element={<MeditationDetails />}
+                    />
 
-                <Route path="/music/login" element={<SpotifyStart />} />
-                <Route path="/music" element={<MusicOverview />} />
-                {/* </Route> */}
+                    <Route path="/music/login" element={<SpotifyStart />} />
+                    <Route path="/music" element={<MusicOverview />} />
+                </Route>
             </Routes>
         </div>
     );
