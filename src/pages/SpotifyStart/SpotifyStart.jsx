@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
 import MusicOverview from "../MusicOverview/MusicOverview";
+import MeditationDetails from "../MeditationDetails/MeditationDetails";
 import SpotifyLogin from "../SpotifyLogin/SpotifyLogin";
 import Cookies from "universal-cookie";
+import { useParams } from "react-router-dom";
 
 const cookies = new Cookies();
 
@@ -11,6 +13,9 @@ const SpotifyStart = () => {
 
     // der code wird von der Spotify Login Seite zurückgegeben. Wenn er hier leer bleibt wird die SpotifyLogin component gerendert
     const code = new URLSearchParams(window.location.search).get("code");
+
+    let { referrer } = useParams();
+    console.log("referrer in start: " + referrer);
 
     console.log("Start");
     console.log(code);
@@ -23,13 +28,15 @@ const SpotifyStart = () => {
             if (code) {
                 try {
                     const response = await fetch(
-                        "http://localhost:10000/spotify/login",
+                        import.meta.env.VITE_BACKEND +
+                            import.meta.env.VITE_API_VERSION +
+                            "/spotify/login",
                         {
                             method: "POST",
                             headers: {
                                 "Content-Type": "application/json",
                             },
-                            body: JSON.stringify({ code }),
+                            body: JSON.stringify({ code, referrer }),
                         }
                     );
                     const data = await response.json();
@@ -64,9 +71,13 @@ const SpotifyStart = () => {
     }
 
     return accessToken ? (
-        <MusicOverview accessToken={accessToken} />
+        (referrer = "musicoverview") ? (
+            <MusicOverview accessToken={accessToken} />
+        ) : (
+            <MeditationDetails accessToken={accessToken} />
+        )
     ) : (
-        <SpotifyLogin />
+        <SpotifyLogin referrer={referrer} />
     );
 };
 

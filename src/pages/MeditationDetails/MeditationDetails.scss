@@ -29,7 +29,7 @@
     }
 
     .meditationDetails {
-        padding: 0 5%;
+        padding: 0 8%;
 
         h1 {
             margin-bottom: 3%;
@@ -42,7 +42,7 @@
         .likesAndSongs {
             display: flex;
             gap: 12%;
-            padding: 9% 0;
+            padding: 9% 2%;
 
             .meditationFavoritesAndViews {
                 position: relative;
@@ -81,6 +81,21 @@
             margin: 0 7%;
             border-bottom: 1px solid #adb8d929;
 
+            a,
+            button {
+                position: absolute;
+                top: 15px;
+                left: 0;
+                background-color: rgba(255, 255, 255, 0);
+                border: none;
+
+                img {
+                    object-fit: contain;
+                    width: 35px;
+                    height: 35px;
+                }
+            }
+
             h3 {
                 font-size: 0.9rem;
                 color: #3f414ed8;
@@ -89,19 +104,6 @@
             p {
                 font-size: 0.8rem;
             }
-        }
-
-        div::before {
-            content: "";
-            position: absolute;
-            top: 18px;
-            left: 0;
-            height: 35px;
-            width: 35px;
-            background-image: url(../../assets/images/MusicPlayIcon.png);
-            background-repeat: no-repeat;
-            background-position: center;
-            background-size: contain;
         }
     }
 }

@@ -4,12 +4,105 @@
         margin-bottom: 2%;
     }
 
+    padding-bottom: 25%;
+
     .homeHeader {
-        padding: 20% 5% 5% 5%;
+        padding: 25% 5% 5% 5%;
+
+        p {
+            font-size: 0.85rem;
+            margin-bottom: 2%;
+        }
+    }
+
+    #randomSuggestions {
+        display: flex;
+        gap: 15px;
+        padding: 0 4.5%;
+
+        div {
+            position: relative;
+
+            video,
+            img {
+                width: 43.5vw;
+                height: 23vh;
+                object-fit: cover;
+                border-radius: 10px;
+                object-position: bottom center;
+                filter: brightness(0.7);
+            }
+
+            h3 {
+                position: absolute;
+                bottom: 40%;
+                left: 0;
+                color: #faf0e0;
+                font-size: 1rem;
+                width: 35vw;
+                padding: 0 7%;
+            }
+
+            p {
+                position: absolute;
+                color: #faf0e0;
+                padding: 0 7%;
+                font-size: 0.8rem;
+            }
+
+            p:first-of-type {
+                bottom: 30%;
+                left: 0;
+            }
+
+            p:nth-of-type(2) {
+                bottom: 10%;
+                left: 0;
+            }
+            p:nth-of-type(3) {
+                bottom: 10%;
+                right: 7%;
+                color: #4a503d;
+                background-color: #faf0e0;
+                padding: 2% 7%;
+                border-radius: 15px;
+            }
+        }
+    }
+
+    form {
+        width: 100%;
+        position: relative;
+        margin: 7% 0;
+
+        input {
+            width: 90%;
+            display: block;
+            margin: auto;
+            background-color: #ecedf0;
+            border: none;
+            border-radius: 10px;
+            line-height: 1.7rem;
+            padding: 0 3%;
+        }
+    }
+
+    form::before {
+        content: "";
+        position: absolute;
+        top: 17%;
+        right: 7%;
+        z-index: 2;
+        height: 17px;
+        width: 17px;
+        background-image: url(../../assets/images/SearchIcon.png);
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
     }
 
     .homeVideos {
-        padding: 10% 0 10% 5%;
+        padding-left: 5%;
 
         h2 {
             margin-bottom: 5%;
@@ -17,28 +110,46 @@
 
         div {
             display: flex;
-            gap: 20px;
-            overflow: scroll;
-            padding-right: 5%;
+            gap: 2%;
+            overflow-x: scroll;
+            overflow-y: hidden;
+            padding-right: 2%;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+            height: 21vh;
 
-            video {
+            a {
                 width: 35vw;
-                height: 13vh;
-                object-fit: cover;
-                border-radius: 10px;
-            }
 
-            h3 {
-                font-size: 1rem;
-            }
+                video,
+                img {
+                    width: 35vw;
+                    height: 13vh;
+                    object-fit: cover;
+                    border-radius: 10px;
+                    object-position: bottom center;
+                }
 
-            div {
-                justify-content: space-between;
+                h3 {
+                    font-size: 1rem;
+                    line-height: 1.3em;
+                    max-height: 2.7em;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
 
-                p {
-                    font-size: 0.7rem;
+                div {
+                    justify-content: space-between;
+
+                    p {
+                        font-size: 0.7rem;
+                        padding-bottom: 10%;
+                    }
                 }
             }
+        }
+        div::-webkit-scrollbar {
+            display: none;
         }
     }
 }

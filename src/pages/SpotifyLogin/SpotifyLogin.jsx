@@ -1,10 +1,11 @@
 import { Link } from "react-router-dom";
+
 import "./SpotifyLogin.scss";
 
-const AUTH_URL =
-    "https://accounts.spotify.com/authorize?client_id=ab15df07233441198e07735bdb853e7b&response_type=code&redirect_uri=http://localhost:5173/music/login&scope=streaming%20user-read-email%20user-read-private%20user-library-read%20user-library-modify%20user-read-playback-state%20user-modify-playback-state";
+const SpotifyLogin = ({ referrer }) => {
+    const AUTH_URL = `https://accounts.spotify.com/authorize?client_id=ab15df07233441198e07735bdb853e7b&response_type=code&redirect_uri=http://localhost:5173/music/login/${referrer}&scope=streaming%20user-read-email%20user-read-private%20user-library-read%20user-library-modify%20user-read-playback-state%20user-modify-playback-state`;
 
-const SpotifyLogin = () => {
+    console.log("AUTH_URL: " + AUTH_URL);
     return (
         <div id="spotifyLogin">
             <h1 className="heading1">Login required</h1>

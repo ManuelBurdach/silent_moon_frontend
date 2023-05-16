@@ -1,0 +1,101 @@
+#spotifyPlayerLarge {
+    background-color: #fbf2db;
+    background-image: url(../../assets/images/SpotifyPlayerBackground.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    z-index: 100;
+    padding-top: 100%;
+
+    .PlayerRSWP {
+        font-family: "Source Sans Pro Regular";
+        color: #4a503d;
+
+        .rswp__active._InfoRSWP.__1jmym9x {
+            border: none;
+            display: block;
+            text-align: center;
+
+            img {
+                display: none;
+            }
+        }
+
+        ._ContentWrapperRSWP.__1c53jt9 {
+            > a {
+                display: none;
+            }
+        }
+
+        ._ContentRSWP {
+            width: 100vw;
+            margin-bottom: 10%;
+            p:nth-of-type(1) {
+                display: block;
+            }
+        }
+
+        ._ContentRSWP.__mdrp5m {
+            display: block;
+
+            button {
+                display: none;
+            }
+
+            p:nth-of-type(1) {
+                a {
+                    font-family: "Source Sans Pro Bold";
+                    color: #4a503d;
+                    letter-spacing: 0.06em;
+                    font-size: 2rem;
+                }
+            }
+            p:nth-of-type(2) {
+                a {
+                    font-family: "Source Sans Pro Regular";
+                    color: #a1a4b2;
+                    letter-spacing: 0.05em;
+                    text-transform: uppercase;
+                }
+            }
+        }
+
+        .rswp__toggle._ControlsButtonRSWP.__3hmsj {
+            width: 25vw;
+            height: 25vw;
+
+            svg {
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+                color: #8e9775;
+                border: 10px solid #a1a4b22a; /* Adjust the border properties as needed */
+                border-radius: 50%;
+            }
+        }
+
+        ._DevicesRSWP.__n5xkwq {
+            button {
+                display: none;
+            }
+        }
+
+        ._VolumeRSWP.__opinp7 {
+            display: none;
+        }
+
+        ._ControlsButtonsRSWP.__a3qe0k {
+            justify-content: space-between;
+            margin-bottom: 10%;
+        }
+
+        ._ControlsButtonRSWP.__3hmsj {
+            color: #a0a3b1;
+        }
+    }
+}

@@ -1,21 +1,37 @@
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, Link } from "react-router-dom";
 import "./MeditationDetails.scss";
 import { useState, useRef, useEffect } from "react";
 import Navigation from "../../components/Navigation/Navigation";
 import BackButton from "../../components/BackButton/BackButton";
 import LikeButton from "../../components/LikeButton/LikeButton";
 import { userState } from "../../state/userState";
+import SpotifyWebApi from "spotify-web-api-node";
+import Cookies from "universal-cookie";
+import PlayButton from "../../assets/images/MusicPlayIcon.png";
+import SpotifyPlayerLarge from "../../components/PlayerLarge/PlayerLarge";
 
 const CLIENT_ID = import.meta.env.VITE_SPOTIFY_CLIENT_ID;
 const CLIENT_SECRET = import.meta.env.VITE_SPOTIFY_CLIENT_SECRET;
 
-const MeditationDetails = () => {
+const spotifyApi = new SpotifyWebApi({
+    clientId: CLIENT_ID,
+});
+
+const cookies = new Cookies();
+
+const MeditationDetails = ({ accessToken }) => {
     const [selectedPlaylist, setSelectedPlaylist] = useState([]);
-    const [accessToken, setAccessToken] = useState("");
     const [loading, setLoading] = useState(true);
+    const [playingTrack, setPlayingTrack] = useState();
+
+    const nav = useNavigate();
+
+    spotifyApi.setAccessToken(accessToken);
+
+    const cookieAccessToken = cookies.get("spotifyAccessToken");
+    spotifyApi.setAccessToken(cookieAccessToken);
 
     let { playlistId } = useParams();
-    const nav = useNavigate();
     const setUser = userState((state) => state.setUser);
 
     useEffect(() => {
@@ -35,14 +51,13 @@ const MeditationDetails = () => {
         fetch("https://accounts.spotify.com/api/token", authParameters)
             .then((result) => result.json())
             .then((data) => {
-                setAccessToken(data.access_token);
                 fetchPlaylist(data.access_token);
             });
     }, []);
 
-    function fetchPlaylist(accessToken) {
+    function fetchPlaylist(spotifyAuthorization) {
         const headers = {
-            Authorization: `Bearer ${accessToken}`,
+            Authorization: `Bearer ${spotifyAuthorization}`,
         };
 
         fetch(`https://api.spotify.com/v1/playlists/${playlistId}`, {
@@ -93,10 +108,27 @@ const MeditationDetails = () => {
                         {selectedPlaylist &&
                             selectedPlaylist.tracks &&
                             selectedPlaylist.tracks.items.map((item) => (
-                                <div
-                                    key={item.track.id}
-                                    onClick={() => playSong(item.track.uri)}
-                                >
+                                <div key={item.track.id}>
+                                    {accessToken || cookieAccessToken ? (
+                                        <button
+                                            onClick={() =>
+                                                setPlayingTrack(item.track)
+                                            }
+                                        >
+                                            <img
+                                                src={PlayButton}
+                                                alt="play button"
+                                            />
+                                        </button>
+                                    ) : (
+                                        <Link to="/music/login/meditationdetails">
+                                            <img
+                                                src={PlayButton}
+                                                alt="play button"
+                                            />
+                                        </Link>
+                                    )}
+
                                     <h3 className="heading2">
                                         {item.track.name}
                                     </h3>
@@ -118,7 +150,15 @@ const MeditationDetails = () => {
                     </article>
                 </div>
             )}
+
             <Navigation />
+            {playingTrack && (
+                <SpotifyPlayerLarge
+                    accessToken={accessToken || cookieAccessToken}
+                    trackUri={playingTrack?.uri}
+                    setPlayingTrack={setPlayingTrack}
+                />
+            )}
         </section>
     );
 };

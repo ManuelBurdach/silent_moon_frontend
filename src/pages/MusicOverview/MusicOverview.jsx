@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import "./MusicOverview.scss";
 import Navigation from "../../components/Navigation/Navigation";
-import Player from "../../components/Player/Player";
+import Player from "../../components/PlayerSmall/Player";
 import SpotifyWebApi from "spotify-web-api-node";
 import { useNavigate, Link } from "react-router-dom";
 import PlayButton from "../../assets/images/MusicPlayIcon.png";
@@ -27,6 +27,9 @@ const MusicOverview = ({ accessToken }) => {
 
     const cookieAccessToken = cookies.get("spotifyAccessToken");
     spotifyApi.setAccessToken(cookieAccessToken);
+
+    console.log(accessToken);
+    console.log(cookieAccessToken);
 
     useEffect(() => {
         // get basic authorization for Spotify (no access to player)
@@ -68,6 +71,7 @@ const MusicOverview = ({ accessToken }) => {
 
             <h1 className="heading1">{playlist ? playlist.name : ""}</h1>
             <p className="textSmall uppercase">Playlist</p>
+
             <p className="textSmall">Breathe. Sense. Feel. Transcend.</p>
             {playlist && (
                 <div className="likesAndSongs">
@@ -98,7 +102,7 @@ const MusicOverview = ({ accessToken }) => {
                                     <img src={PlayButton} alt="play button" />
                                 </button>
                             ) : (
-                                <Link to="/music/login">
+                                <Link to="/music/login/musicoverview">
                                     <img src={PlayButton} alt="play button" />
                                 </Link>
                             )}

@@ -1,0 +1,32 @@
+#spotifyPlayerSmall {
+    .PlayerRSWP {
+        position: fixed;
+        bottom: 9%;
+        left: 0;
+        font-family: "Source Sans Pro Regular";
+        color: #4a503d;
+        box-shadow: 2px -5px 17px rgba(84, 87, 92, 0.1);
+
+        svg {
+            filter: opacity(75%);
+        }
+
+        .rswp__active._InfoRSWP.__1jmym9x {
+            border: none;
+        }
+
+        ._ContentWrapperRSWP.__1c53jt9 {
+            > a {
+                display: none;
+            }
+        }
+        ._ContentRSWP.__mdrp5m {
+            justify-content: space-between;
+            padding-right: 5%;
+        }
+
+        ._SliderRSWP.__q14q70 {
+            margin-bottom: 3%;
+        }
+    }
+}

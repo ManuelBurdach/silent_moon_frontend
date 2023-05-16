@@ -13,6 +13,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.11.1",
+    "react-spotify-player": "^1.0.4",
     "react-spotify-web-playback": "^0.14.0",
     "sass": "^1.62.1",
     "spotify-web-api-node": "^5.0.2",

@@ -13,15 +13,15 @@ import MeditationOverview from "./pages/MeditationOverview/MeditationOverview";
 import MeditationDetails from "./pages/MeditationDetails/MeditationDetails";
 import SpotifyStart from "./pages/spotifyStart/spotifyStart";
 import MusicOverview from "./pages/MusicOverview/MusicOverview";
+import Reminder from "./pages/Reminder/Reminder";
 
 import { userState } from "./state/userState";
 import { useEffect } from "react";
-import Reminder from "./pages/Reminder/Reminder";
 
 function App() {
     const setUser = userState((state) => state.setUser);
 
-    useEffect(() => {
+    /*  useEffect(() => {
         (async () => {
             try {
                 const response = await fetch(
@@ -45,7 +45,7 @@ function App() {
                 console.error("Error:", error);
             }
         })();
-    }, []);
+    }, []); */
 
     return (
         <div className="App">
@@ -53,25 +53,25 @@ function App() {
                 <Route path="/" element={<Start />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
-
-                <Route element={<ProtectRoutes />}>
-                    <Route path="/welcome" element={<Welcome />} />
-                    <Route path="/reminder" element={<Reminder />} />
-                    <Route path="/home" element={<Home />} />
-                    <Route path="/yoga" element={<YogaOverview />} />
-                    <Route
-                        path="/yogadetails/:videoId"
-                        element={<YogaDetails />}
-                    />
-                    <Route path="/meditate" element={<MeditationOverview />} />
-                    <Route
-                        path="/meditatedetails/:playlistId"
-                        element={<MeditationDetails />}
-                    />
-
-                    <Route path="/music/login" element={<SpotifyStart />} />
-                    <Route path="/music" element={<MusicOverview />} />
-                </Route>
+                {/*                 <Route element={<ProtectRoutes />}>
+                 */}{" "}
+                <Route path="/welcome" element={<Welcome />} />
+                <Route path="/reminder" element={<Reminder />} />
+                <Route path="/home" element={<Home />} />
+                <Route path="/yoga" element={<YogaOverview />} />
+                <Route path="/yogadetails/:videoId" element={<YogaDetails />} />
+                <Route path="/meditate" element={<MeditationOverview />} />
+                <Route
+                    path="/meditatedetails/:playlistId"
+                    element={<MeditationDetails />}
+                />
+                <Route
+                    path="/music/login/:referrer"
+                    element={<SpotifyStart />}
+                />
+                <Route path="/music" element={<MusicOverview />} />
+                {/*                 </Route>
+                 */}{" "}
             </Routes>
         </div>
     );
