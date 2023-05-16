@@ -1,78 +1,152 @@
 @font-face {
-  font-family: "Source Sans Pro Regular";
-  src: url(./assets/fonts/SourceSansPro-Regular.ttf);
+    font-family: "Source Sans Pro Regular";
+    src: url(./assets/fonts/SourceSansPro-Regular.ttf);
 }
 
 @font-face {
-  font-family: "Source Sans Pro Semibold";
-  src: url(./assets/fonts/SourceSansPro-SemiBold.ttf);
+    font-family: "Source Sans Pro Semibold";
+    src: url(./assets/fonts/SourceSansPro-SemiBold.ttf);
 }
 
 @font-face {
-  font-family: "Source Sans Pro Bold";
-  src: url(./assets/fonts/SourceSansPro-Bold.ttf);
+    font-family: "Source Sans Pro Bold";
+    src: url(./assets/fonts/SourceSansPro-Bold.ttf);
 }
 
 @font-face {
-  font-family: "Roboto Medium";
-  src: url(./assets/fonts/Roboto-Medium.ttf);
+    font-family: "Roboto Medium";
+    src: url(./assets/fonts/Roboto-Medium.ttf);
 }
 
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 .logo {
-  position: absolute;
-  top: 0;
-  width: 100%;
-  text-align: center;
-  padding: 7% 0;
-  font-family: "Source Sans Pro Semibold";
-  letter-spacing: 0.2em;
-  color: #4a503d;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    text-align: center;
+    padding: 7% 0;
+    font-family: "Source Sans Pro Semibold";
+    letter-spacing: 0.2em;
+    color: #4a503d;
 }
 
 .logo.light {
-  color: #fefcf8;
+    color: #fefcf8;
 }
 
 .bigRedButton {
-  background-color: #e28f83;
-  color: #faf2da;
-  padding: 5% 35%;
-  font-family: "Source Sans Pro Regular";
-  text-transform: uppercase;
-  text-decoration: none;
-  border-radius: 40px;
+    background-color: #e28f83;
+    color: #faf2da;
+    padding: 5% 35%;
+    font-family: "Source Sans Pro Regular";
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 40px;
 }
 
 .heading1 {
-  font-family: "Source Sans Pro Bold";
-  color: #4a503d;
-  letter-spacing: 0.06em;
-  font-size: 2rem;
+    font-family: "Source Sans Pro Bold";
+    color: #4a503d;
+    letter-spacing: 0.06em;
+    font-size: 2rem;
 }
 
 .heading2 {
-  font-family: "Source Sans Pro Bold";
-  letter-spacing: 0.06em;
-  color: #4a503d;
-  font-size: 1.3rem;
+    font-family: "Source Sans Pro Bold";
+    letter-spacing: 0.06em;
+    color: #4a503d;
+    font-size: 1.3rem;
 }
 
 .textSmall {
-  font-family: "Source Sans Pro Regular";
-  color: #a1a4b2;
-  letter-spacing: 0.05em;
+    font-family: "Source Sans Pro Regular";
+    color: #a1a4b2;
+    letter-spacing: 0.05em;
 }
 
 .textSmall.uppercase {
-  text-transform: uppercase;
+    text-transform: uppercase;
 }
 
 a {
-  text-decoration: none;
+    text-decoration: none;
+}
+
+.likeButton {
+    position: absolute;
+    top: 3%;
+    right: 4%;
+    z-index: 100;
+    background-color: #e2908383;
+    border: 1px solid #e28f83;
+    padding: 5%;
+    border-radius: 50px;
+    background-image: url(./assets/images/LikeButtonLight.png);
+    background-repeat: no-repeat;
+    background-size: 40%;
+    background-position: center;
+}
+
+.likeButton.liked {
+    background-image: url(./assets/images/LikeCount.png);
+    background-color: rgba(255, 255, 255, 0);
+    border: none;
+    background-size: 60%;
+}
+
+.homeVideos {
+    padding-left: 5%;
+
+    h2 {
+        margin-bottom: 5%;
+    }
+
+    div {
+        display: flex;
+        gap: 2%;
+        overflow-x: scroll;
+        overflow-y: hidden;
+        padding-right: 2%;
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+        height: 21vh;
+
+        a {
+            width: 35vw;
+
+            video,
+            img {
+                width: 35vw;
+                height: 13vh;
+                object-fit: cover;
+                border-radius: 10px;
+                object-position: bottom center;
+            }
+
+            h3 {
+                font-size: 1rem;
+                line-height: 1.3em;
+                max-height: 2.7em;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
+            div {
+                justify-content: space-between;
+
+                p {
+                    font-size: 0.7rem;
+                    padding-bottom: 10%;
+                }
+            }
+        }
+    }
+    div::-webkit-scrollbar {
+        display: none;
+    }
 }

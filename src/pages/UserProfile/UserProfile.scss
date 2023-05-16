@@ -1,0 +1,38 @@
+#userProfile {
+    h1 {
+        margin: 25% 0 15% 5%;
+    }
+    form {
+        width: 100%;
+        position: relative;
+        margin-bottom: 10%;
+        input {
+            width: 90%;
+            display: block;
+            margin: auto;
+            background-color: #ecedf0;
+            border: none;
+            border-radius: 10px;
+            line-height: 1.7rem;
+            padding: 0 3%;
+        }
+    }
+
+    form::before {
+        content: "";
+        position: absolute;
+        top: 17%;
+        right: 7%;
+        z-index: 2;
+        height: 17px;
+        width: 17px;
+        background-image: url(../../assets/images/SearchIcon.png);
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
+    }
+
+    div {
+        margin-bottom: 5%;
+    }
+}
