@@ -33,7 +33,7 @@ const ProtectRoutes = () => {
   const user = userState((state) => state.user);
 
   useEffect(() => {
-    if (!user?.isLoggedIn) nav("/");
+    if (!user?.isLoggedIn) nav("/login");
   });
   return <>{user?.isLoggedIn && <Outlet />}</>;
 };
