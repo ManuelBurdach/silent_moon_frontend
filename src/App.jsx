@@ -11,7 +11,7 @@ import YogaDetails from "./pages/YogaDetails/YogaDetails";
 import YogaOverview from "./pages/YogaOverview/YogaOverview";
 import MeditationOverview from "./pages/MeditationOverview/MeditationOverview";
 import MeditationDetails from "./pages/MeditationDetails/MeditationDetails";
-import SpotifyStart from "./pages/spotifyStart/spotifyStart";
+import SpotifyStart from "./pages/SpotifyStart/SpotifyStart";
 import MusicOverview from "./pages/MusicOverview/MusicOverview";
 import Reminder from "./pages/Reminder/Reminder";
 
