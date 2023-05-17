@@ -14,6 +14,7 @@ const UserProfile = () => {
     const [accessToken, setAccessToken] = useState("");
     const [playlists, setPlaylists] = useState([]);
     const [searchQuery, setSearchQuery] = useState("");
+    const [isLoading, setIsLoading] = useState(true);
 
     const user = userState((state) => state.user);
 
@@ -59,11 +60,10 @@ const UserProfile = () => {
             .then((result) => result.json())
             .then((data) => {
                 setAccessToken(data.access_token);
-                fetchPlaylists(data.access_token);
             });
     }, []);
 
-    function fetchPlaylists(accessToken) {
+    useEffect(() => {
         const headers = {
             Authorization: `Bearer ${accessToken}`,
         };
@@ -77,14 +77,16 @@ const UserProfile = () => {
         Promise.all(promises)
             .then((data) => {
                 setPlaylists(data);
+                setIsLoading(false);
             })
             .catch((error) => {
                 console.error("Error fetching playlists:", error);
             });
-    }
+    }, [accessToken]);
 
-    console.log(favoritePlaylists);
-    console.log(favoriteVideos);
+    if (isLoading) {
+        return <div>Loading...</div>; // or any loading indicator/component
+    }
 
     return (
         <section id="userProfile">
