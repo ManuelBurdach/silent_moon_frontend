@@ -1,12 +1,16 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Navigation from "../../components/Navigation/Navigation";
 import SpotifyLoginImg from "../../assets/images/SpotifyLogin.png";
 import "./SpotifyLogin.scss";
 
-const SpotifyLogin = ({ referrer }) => {
-    const AUTH_URL = `https://accounts.spotify.com/authorize?client_id=ab15df07233441198e07735bdb853e7b&response_type=code&redirect_uri=http://localhost:5173/music/login/${referrer}&scope=streaming%20user-read-email%20user-read-private%20user-library-read%20user-library-modify%20user-read-playback-state%20user-modify-playback-state`;
+const SpotifyLogin = () => {
+    const AUTH_URL = `https://accounts.spotify.com/authorize?client_id=ab15df07233441198e07735bdb853e7b&response_type=code&redirect_uri=https://silentmoonfrontend-production.up.railway.app/spotify/login&scope=streaming%20user-read-email%20user-read-private%20user-library-read%20user-library-modify%20user-read-playback-state%20user-modify-playback-state`;
 
-    console.log("AUTH_URL: " + AUTH_URL);
+    const nav = useNavigate();
+    const goBack = () => {
+        navigate(-1);
+    };
+
     return (
         <section id="spotifyLogin">
             <p className="logo light">SILENT MOON</p>
@@ -24,9 +28,9 @@ const SpotifyLogin = ({ referrer }) => {
                     <a href={AUTH_URL} className="bigRedButton">
                         Login With Spotify
                     </a>
-                    <Link to="/music" className="textSmall">
+                    <button onClick={goBack} className="textSmall">
                         Go back without loging in
-                    </Link>
+                    </button>
                 </div>
             </article>
             <Navigation />

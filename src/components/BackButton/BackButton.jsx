@@ -7,8 +7,7 @@ const BackButton = ({ addClass }) => {
     return (
         <button
             onClick={() => navigate(-1)}
-            id="backButton"
-            className={addClass}
+            className={`backButton ${addClass}`}
         ></button>
     );
 };

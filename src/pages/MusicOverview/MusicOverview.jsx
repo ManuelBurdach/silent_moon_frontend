@@ -102,7 +102,7 @@ const MusicOverview = ({ accessToken }) => {
                                     <img src={PlayButton} alt="play button" />
                                 </button>
                             ) : (
-                                <Link to="/music/login/musicoverview">
+                                <Link to="/spotify/login">
                                     <img src={PlayButton} alt="play button" />
                                 </Link>
                             )}

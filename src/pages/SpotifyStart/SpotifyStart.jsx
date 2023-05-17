@@ -14,13 +14,9 @@ const SpotifyStart = () => {
     // der code wird von der Spotify Login Seite zurückgegeben. Wenn er hier leer bleibt wird die SpotifyLogin component gerendert
     const code = new URLSearchParams(window.location.search).get("code");
 
-    let { referrer } = useParams();
-    console.log("referrer in start: " + referrer);
+    const storedReferrer = localStorage.getItem("referrer").replace("-", "/");
 
-    console.log("Start");
-    console.log(code);
-    console.log(accessToken);
-    console.log(loading);
+    console.log("referrer in start: " + storedReferrer);
 
     useEffect(() => {
         const login = async () => {
@@ -36,7 +32,7 @@ const SpotifyStart = () => {
                             headers: {
                                 "Content-Type": "application/json",
                             },
-                            body: JSON.stringify({ code, referrer }),
+                            body: JSON.stringify({ code }),
                         }
                     );
                     const data = await response.json();
@@ -70,15 +66,20 @@ const SpotifyStart = () => {
         return <div>Loading...</div>;
     }
 
-    return accessToken ? (
-        (referrer = "musicoverview") ? (
-            <MusicOverview accessToken={accessToken} />
-        ) : (
-            <MeditationDetails accessToken={accessToken} />
-        )
-    ) : (
-        <SpotifyLogin referrer={referrer} />
-    );
+    if (accessToken) {
+        if (storedReferrer.includes("meditationdetails")) {
+            return (
+                <MeditationDetails
+                    accessToken={accessToken}
+                    id={storedReferrer}
+                />
+            );
+        } else {
+            return <MusicOverview accessToken={accessToken} />;
+        }
+    } else {
+        return <SpotifyLogin />;
+    }
 };
 
 export default SpotifyStart;

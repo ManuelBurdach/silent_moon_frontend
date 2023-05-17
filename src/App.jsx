@@ -69,10 +69,7 @@ function App() {
                         path="/meditatedetails/:playlistId"
                         element={<MeditationDetails />}
                     />
-                    <Route
-                        path="/music/login/:referrer"
-                        element={<SpotifyStart />}
-                    />
+                    <Route path="/spotify/login" element={<SpotifyStart />} />
                     <Route path="/music" element={<MusicOverview />} />
                     <Route path="/profile" element={<UserProfile />} />
                     <Route path="/test" element={<TimePicker />} />

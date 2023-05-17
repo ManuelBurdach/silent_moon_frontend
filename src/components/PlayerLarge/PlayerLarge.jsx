@@ -16,14 +16,14 @@ const SpotifyPlayerLarge = ({ accessToken, trackUri, setPlayingTrack }) => {
         <div id="spotifyPlayerLarge">
             <button
                 onClick={() => setPlayingTrack(null)}
-                id="backButton"
+                className="backButton"
             ></button>
             <LikeButton />
             <SpotifyPlayer
                 token={accessToken}
                 showSaveIcon
                 callback={(state) => {
-                    if (!state.isPlaying) setPlay(false);
+                    if (!state.isPlaying);
                 }}
                 play={true}
                 uris={trackUri ? [trackUri] : []}

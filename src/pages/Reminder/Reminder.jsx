@@ -130,7 +130,11 @@ const Reminder = () => {
             </div>
 
             <div className="flex">
-                <Link onClick={saveReminder} className="m5 bigRedButton">
+                <Link
+                    onClick={saveReminder}
+                    to="/home"
+                    className="m5 bigRedButton"
+                >
                     SAVE
                 </Link>
                 <Link to="/home" style={{ color: "#e28f83" }}>

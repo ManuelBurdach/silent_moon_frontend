@@ -19,7 +19,7 @@ const spotifyApi = new SpotifyWebApi({
 
 const cookies = new Cookies();
 
-const MeditationDetails = ({ accessToken }) => {
+const MeditationDetails = ({ accessToken, id }) => {
     const [selectedPlaylist, setSelectedPlaylist] = useState([]);
     const [loading, setLoading] = useState(true);
     const [playingTrack, setPlayingTrack] = useState();
@@ -27,7 +27,15 @@ const MeditationDetails = ({ accessToken }) => {
 
     const nav = useNavigate();
     const user = userState((state) => state.user);
+
     let { playlistId } = useParams();
+    let storedPlaylistId = id?.split("/")[1];
+    playlistId = playlistId || storedPlaylistId;
+
+    useEffect(() => {
+        // Store the referrer in local storage
+        localStorage.setItem("referrer", `meditationdetails/${playlistId}`);
+    }, [playlistId]);
 
     spotifyApi.setAccessToken(accessToken);
     const cookieAccessToken = cookies.get("spotifyAccessToken");
@@ -155,7 +163,9 @@ const MeditationDetails = ({ accessToken }) => {
 
     return (
         <section id="meditationDetails">
-            <BackButton addClass="fill" />
+            <Link to={"/meditate"}>
+                <button className="backButton fill"></button>
+            </Link>
             <button
                 className={`likeButton ${
                     favoriteMeditation &&
@@ -213,7 +223,7 @@ const MeditationDetails = ({ accessToken }) => {
                                             />
                                         </button>
                                     ) : (
-                                        <Link to="/music/login/meditationdetails">
+                                        <Link to={`/spotify/login`}>
                                             <img
                                                 src={PlayButton}
                                                 alt="play button"
