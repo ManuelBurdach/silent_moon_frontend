@@ -14,9 +14,11 @@ import MeditationDetails from "./pages/MeditationDetails/MeditationDetails";
 import SpotifyStart from "./pages/SpotifyStart/SpotifyStart";
 import MusicOverview from "./pages/MusicOverview/MusicOverview";
 import Reminder from "./pages/Reminder/Reminder";
+import UserProfile from "./pages/UserProfile/UserProfile";
 
 import { userState } from "./state/userState";
 import { useEffect } from "react";
+import TimePicker from "./components/TimePicker/TimePicker";
 
 function App() {
     const setUser = userState((state) => state.setUser);
@@ -72,6 +74,8 @@ function App() {
                         element={<SpotifyStart />}
                     />
                     <Route path="/music" element={<MusicOverview />} />
+                    <Route path="/profile" element={<UserProfile />} />
+                    <Route path="/test" element={<TimePicker />} />
                 </Route>
             </Routes>
         </div>

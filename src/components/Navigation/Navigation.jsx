@@ -18,7 +18,7 @@ const Navigation = () => {
             <NavLink to="/music" activeclassname="active">
                 <p className="textSmall">Music</p>
             </NavLink>
-            <NavLink to="/" activeclassname="active">
+            <NavLink to="/profile" activeclassname="active">
                 <p className="textSmall">
                     {user.firstName.charAt(0).toUpperCase() +
                         user.firstName.slice(1)}
