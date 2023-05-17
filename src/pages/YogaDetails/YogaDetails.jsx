@@ -10,6 +10,8 @@ import { userState } from "../../state/userState";
 
 const YogaDetails = () => {
     const [selectedVideo, setSelectedVideo] = useState([]);
+    const [favoriteVideo, setFavoriteVideo] = useState([]);
+
     let { videoId } = useParams();
     const nav = useNavigate();
     const setUser = userState((state) => state.setUser);
@@ -83,6 +85,7 @@ const YogaDetails = () => {
             if (response.ok) {
                 const data = await response.json();
                 console.log("favorite saved");
+                fetchUserDetails();
             } else {
                 const result = response.json();
                 throw new Error("Error saving favorite: " + result);
@@ -92,12 +95,84 @@ const YogaDetails = () => {
         }
     };
 
+    const deleteFavorite = async (video) => {
+        try {
+            const response = await fetch(
+                import.meta.env.VITE_BACKEND +
+                    import.meta.env.VITE_API_VERSION +
+                    "/user/deleteYogaFav",
+                {
+                    method: "DELETE",
+                    credentials: "include",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({ favorite: video }),
+                }
+            );
+            if (response.ok) {
+                const data = await response.json();
+                console.log("favorite deleted");
+                fetchUserDetails();
+            } else {
+                const result = response.json();
+                throw new Error("Error deleting favorite: " + result);
+            }
+        } catch (error) {
+            console.error("Error deleting favorite:", error);
+        }
+    };
+
+    useEffect(() => {
+        fetchUserDetails();
+    }, []);
+
+    const fetchUserDetails = async () => {
+        try {
+            const response = await fetch(
+                import.meta.env.VITE_BACKEND +
+                    import.meta.env.VITE_API_VERSION +
+                    "/user/details",
+                { credentials: "include" }
+            );
+            if (response.ok) {
+                const data = await response.json();
+                setFavoriteVideo(data.favoriteYoga);
+            } else {
+                const result = response.json();
+                throw new Error("Error getting user details");
+            }
+        } catch (error) {
+            console.error("Error getting user details: ", error);
+        }
+    };
+
+    const containsObject = (array, id) => {
+        for (let i = 0; i < array.length; i++) {
+            if (array[i]._id === id) {
+                return true;
+            }
+        }
+        return false;
+    };
+
     return (
         <section id="yogaDetails">
             <BackButton addClass="fill" />
+
             <button
-                className="likeButton"
-                onClick={() => addFavorite(selectedVideo)}
+                className={`likeButton ${
+                    favoriteVideo &&
+                    containsObject(favoriteVideo, selectedVideo._id)
+                        ? "liked"
+                        : ""
+                }`}
+                onClick={() =>
+                    favoriteVideo &&
+                    containsObject(favoriteVideo, selectedVideo._id)
+                        ? deleteFavorite(selectedVideo)
+                        : addFavorite(selectedVideo)
+                }
             ></button>
             <article className="yogaVideo">
                 {selectedVideo.url && (

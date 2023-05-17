@@ -5,9 +5,9 @@ import { Link, useNavigate } from "react-router-dom";
 
 import FilterAll from "../../assets/images/FilterAll.png";
 import FilterFavorites from "../../assets/images/FilterFavorites.png";
-import FilterBeginner from "../../assets/images/FilterBeginner.png";
-import FilterIntermediate from "../../assets/images/FilterIntermediate.png";
-import FilterExpert from "../../assets/images/FilterExpert.png";
+import FilterShort from "../../assets/images/FilterShort.png";
+import FilterMedium from "../../assets/images/FilterMedium.png";
+import FilterExtended from "../../assets/images/FilterExtended.png";
 import DailyCalmPlay from "../../assets/images/DailyCalmPlay.png";
 import { userState } from "../../state/userState";
 
@@ -26,10 +26,11 @@ const PLAYLIST_IDS = [
 ];
 
 const MeditationOverview = () => {
-    const [audios, setAudios] = useState([]);
-    const [filteredAudios, setFilteredAudios] = useState([]);
+    const [filteredPlaylists, setFilteredPlaylists] = useState([]);
+    const [favoritePlaylists, setFavoritePlaylists] = useState([]);
     const [accessToken, setAccessToken] = useState("");
     const [playlists, setPlaylists] = useState([]);
+    const [randomPlaylist, setRandomPlaylist] = useState({});
 
     const date = new Date();
     let day = date.getDate();
@@ -88,33 +89,101 @@ const MeditationOverview = () => {
         Promise.all(promises)
             .then((data) => {
                 setPlaylists(data);
+                setFilteredPlaylists(data);
+            })
+            .catch((error) => {
+                console.error("Error fetching playlists:", error);
+            });
+    }
+    function fetchFavorties(accessToken) {
+        const headers = {
+            Authorization: `Bearer ${accessToken}`,
+        };
+
+        const promises = favoritePlaylists.map((playlistId) =>
+            fetch(`https://api.spotify.com/v1/playlists/${playlistId}`, {
+                headers: headers,
+            }).then((result) => result.json())
+        );
+
+        Promise.all(promises)
+            .then((data) => {
+                setFilteredPlaylists(data);
             })
             .catch((error) => {
                 console.error("Error fetching playlists:", error);
             });
     }
 
-    /* const filterTitle = (e) => {
-    console.log(audios);
-    if (e.target.value == "") {
-        setFilteredAudios(audios);
-    } else {
-        setFilteredAudios(
-        audios.filter((audio) => audio.title.toLowerCase().includes(e.target.value.toLowerCase()))
-      );
-    }
-  }; */
+    useEffect(() => {
+        const fetchUserDetails = async () => {
+            try {
+                const response = await fetch(
+                    import.meta.env.VITE_BACKEND +
+                        import.meta.env.VITE_API_VERSION +
+                        "/user/details",
+                    { credentials: "include" }
+                );
+                if (response.ok) {
+                    const data = await response.json();
+                    setFavoritePlaylists(data.favoriteMeditation);
+                } else {
+                    const result = response.json();
+                    throw new Error("Error getting user details");
+                }
+            } catch (error) {
+                console.error("Error getting user details: ", error);
+            }
+        };
+        fetchUserDetails();
+    }, []);
 
-    /* const filterBy = (property) => {
-    if (property === "all") {
-        setFilteredAudios(audios);
-    } else if (property === "favorites") {
-    } else {
-        setFilteredAudios(
-        audios.filter((audio) => audio.level.toLowerCase().includes(property.toLowerCase()))
-      );
-    }
-  }; */
+    const filterTitle = (e) => {
+        if (e.target.value == "") {
+            setFilteredPlaylists(playlists);
+        } else {
+            setFilteredPlaylists(
+                playlists.filter((playlist) =>
+                    playlist.name
+                        .toLowerCase()
+                        .includes(e.target.value.toLowerCase())
+                )
+            );
+        }
+    };
+
+    const filterBy = (property) => {
+        if (property === "all") {
+            setFilteredPlaylists(playlists);
+        } else if (property === "favorites") {
+            fetchFavorties(accessToken);
+        } else if (property === "short") {
+            const playlistsWithLessThan100Songs = playlists.filter(
+                (playlist) => playlist.tracks.total < 100
+            );
+            setFilteredPlaylists(playlistsWithLessThan100Songs);
+        } else if (property === "medium") {
+            const playlistsBetween100And200Songs = playlists.filter(
+                (playlist) =>
+                    playlist.tracks.total >= 100 && playlist.tracks.total <= 200
+            );
+            setFilteredPlaylists(playlistsBetween100And200Songs);
+        } else if (property === "extended") {
+            const playlistsBetween100And200Songs = playlists.filter(
+                (playlist) => playlist.tracks.total > 200
+            );
+            setFilteredPlaylists(playlistsBetween100And200Songs);
+        }
+    };
+
+    useEffect(() => {
+        if (playlists.length > 0) {
+            const randomIndex = Math.floor(Math.random() * playlists.length);
+            setRandomPlaylist(playlists[randomIndex]);
+        }
+    }, [playlists]);
+
+    console.log(randomPlaylist);
 
     return (
         <section id="meditationOverview">
@@ -144,45 +213,48 @@ const MeditationOverview = () => {
                     </button>
                     <button
                         onClick={() => {
-                            filterBy("beginner");
+                            filterBy("short");
                         }}
                     >
-                        <img src={FilterBeginner} alt="" />
-                        <p className="textSmall">Beginner</p>
+                        <img src={FilterShort} alt="" />
+                        <p className="textSmall">Short</p>
                     </button>
                     <button
                         onClick={() => {
-                            filterBy("intermediate");
+                            filterBy("medium");
                         }}
                     >
-                        <img src={FilterIntermediate} alt="" />
-                        <p className="textSmall">Intermediate</p>
+                        <img src={FilterMedium} alt="" />
+                        <p className="textSmall">Medium</p>
                     </button>
                     <button
                         onClick={() => {
-                            filterBy("expert");
+                            filterBy("extended");
                         }}
                     >
-                        <img src={FilterExpert} alt="" />
-                        <p className="textSmall">Expert</p>
+                        <img src={FilterExtended} alt="" />
+                        <p className="textSmall">Extended</p>
                     </button>
                 </div>
             </article>
             <article className="searchAndAudios">
                 <form>
-                    <input type="text" />
+                    <input type="text" onChange={filterTitle} />
                 </form>
-                <div className="dailyCalm">
-                    <div>
-                        <h3 className="heading2">Daily Calm</h3>
-                        <p className="textSmall uppercase">
-                            {monthNames[month]} {day} • pause practice
-                        </p>
+                <Link to={`/meditatedetails/${randomPlaylist.id}`}>
+                    <div className="dailyCalm">
+                        <div>
+                            <h3 className="heading2">Daily Calm</h3>
+                            <p className="textSmall uppercase">
+                                {monthNames[month - 1]} {day} • pause practice
+                            </p>
+                        </div>
+
+                        <img src={DailyCalmPlay} alt="play button" />
                     </div>
-                    <img src={DailyCalmPlay} alt="play button" />
-                </div>
+                </Link>
                 <div className="audioList">
-                    {playlists.map((playlist) => (
+                    {filteredPlaylists.map((playlist) => (
                         <Link
                             to={`/meditatedetails/${playlist.id}`}
                             key={playlist.id}
