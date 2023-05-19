@@ -37,8 +37,6 @@ function App() {
                 const data = await response.json();
                 if (response.ok) {
                     setUser(data);
-
-                    history.back();
                 } else {
                     setUser(data);
                     throw new Error("Authentification faild");
