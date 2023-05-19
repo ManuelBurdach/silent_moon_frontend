@@ -41,9 +41,9 @@ const ProtectRoutes = () => {
     const nav = useNavigate();
     const user = userState((state) => state.user);
 
-    useEffect(() => {
+    /* useEffect(() => {
         if (!user?.isLoggedIn) nav("/login");
-    });
+    }); */
 
     if (isLoading) {
         return (

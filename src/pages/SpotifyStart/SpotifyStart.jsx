@@ -64,13 +64,13 @@ const SpotifyStart = () => {
 
     if (loading) {
         return (
-            <>
+            <div>
                 <div className="lds-ripple">
                     <div></div>
                     <div></div>
                 </div>
                 <Navigation />
-            </>
+            </div>
         );
     }
 
