@@ -86,111 +86,133 @@ const UserProfile = () => {
 
     console.log(isLoading);
 
-    if (isLoading) {
-        <div className="lds-ripple">
-            <div></div>
-            <div></div>
-        </div>;
+    if (isLoading || playlists.length == 0 || favoriteVideos.length == 0) {
+        <>
+            <div className="lds-ripple">
+                <div></div>
+                <div></div>
+            </div>
+            <Navigation />
+        </>;
     }
 
     return (
         <section id="userProfile">
-            <h4 className="logo">SILENT MOON</h4>
+            {playlists.length > 0 && favoriteVideos.length > 0 && (
+                <>
+                    <h4 className="logo">SILENT MOON</h4>
 
-            <article id="userProfileHeader">
-                <h1 className="heading1">Hi {user.firstName}!</h1>
-                <p className="textSmall">Find your favorite content here. </p>
-            </article>
-            <form>
-                <input
-                    type="text"
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                />
-            </form>
-            <article className="homeVideos">
-                <h2 className="heading2">Your Favorite Yoga Sessions</h2>
-                <div>
-                    {favoriteVideos
-                        .filter((video) =>
-                            video.title
-                                .toLowerCase()
-                                .includes(searchQuery.toLowerCase())
-                        )
-                        .map((video) => (
-                            <Link
-                                to={`/yogadetails/${video._id}`}
-                                key={video._id}
-                            >
-                                <video controls={false}>
-                                    <source src={video.url} />
-                                </video>
+                    <article id="userProfileHeader">
+                        <h1 className="heading1">Hi {user.firstName}!</h1>
+                        <p className="textSmall">
+                            Find your favorite content here.{" "}
+                        </p>
+                    </article>
+                    <form>
+                        <input
+                            type="text"
+                            value={searchQuery}
+                            onChange={(e) => setSearchQuery(e.target.value)}
+                        />
+                    </form>
+                    <article className="homeVideos">
+                        <h2 className="heading2">
+                            Your Favorite Yoga Sessions
+                        </h2>
+                        <div>
+                            {favoriteVideos
+                                .filter((video) =>
+                                    video.title
+                                        .toLowerCase()
+                                        .includes(searchQuery.toLowerCase())
+                                )
+                                .map((video) => (
+                                    <Link
+                                        to={`/yogadetails/${video._id}`}
+                                        key={video._id}
+                                    >
+                                        <video controls={false}>
+                                            <source src={video.url} />
+                                        </video>
 
-                                <h3 className="heading2">{video.title}</h3>
-                                <div>
-                                    <p className="textSmall uppercase">
-                                        {video.level}
-                                    </p>
-                                    <p className="textSmall uppercase">
-                                        {video.duration} min
-                                    </p>
-                                </div>
-                            </Link>
-                        ))}
-                    {favoriteVideos.filter((video) =>
-                        video.title
-                            .toLowerCase()
-                            .includes(searchQuery.toLowerCase())
-                    ).length === 0 && (
-                        <Link>
-                            <img src={DefaultResult} alt="" />
+                                        <h3 className="heading2">
+                                            {video.title}
+                                        </h3>
+                                        <div>
+                                            <p className="textSmall uppercase">
+                                                {video.level}
+                                            </p>
+                                            <p className="textSmall uppercase">
+                                                {video.duration} min
+                                            </p>
+                                        </div>
+                                    </Link>
+                                ))}
+                            {favoriteVideos.filter((video) =>
+                                video.title
+                                    .toLowerCase()
+                                    .includes(searchQuery.toLowerCase())
+                            ).length === 0 && (
+                                <Link>
+                                    <img src={DefaultResult} alt="" />
 
-                            <h3 className="heading2">No yoga video found</h3>
-                        </Link>
-                    )}
-                </div>
-            </article>
-            <article className="homeVideos">
-                <h2 className="heading2">Your Favorite Meditations</h2>
-                <div>
-                    {playlists
-                        .filter((playlist) =>
-                            playlist.name
-                                .toLowerCase()
-                                .includes(searchQuery.toLowerCase())
-                        )
-                        .map((playlist) => (
-                            <Link
-                                to={`/meditatedetails/${playlist.id}`}
-                                key={playlist.id}
-                            >
-                                <img src={playlist.images[0].url} alt="" />
+                                    <h3 className="heading2">
+                                        No yoga video found
+                                    </h3>
+                                </Link>
+                            )}
+                        </div>
+                    </article>
+                    <article className="homeVideos">
+                        <h2 className="heading2">Your Favorite Meditations</h2>
+                        <div>
+                            {playlists
+                                .filter((playlist) =>
+                                    playlist.name
+                                        .toLowerCase()
+                                        .includes(searchQuery.toLowerCase())
+                                )
+                                .map((playlist) => (
+                                    <Link
+                                        to={`/meditatedetails/${playlist.id}`}
+                                        key={playlist.id}
+                                    >
+                                        <img
+                                            src={playlist.images[0].url}
+                                            alt=""
+                                        />
 
-                                <h3 className="heading2">{playlist.name}</h3>
-                                <div>
-                                    <p className="textSmall uppercase">
-                                        playlist
-                                    </p>
-                                    <p className="textSmall uppercase">
-                                        {playlist.tracks.total} items
-                                    </p>
-                                </div>
-                            </Link>
-                        ))}
-                    {playlists.filter((playlist) =>
-                        playlist.name
-                            .toLowerCase()
-                            .includes(searchQuery.toLowerCase())
-                    ).length === 0 && (
-                        <Link>
-                            <img src={DefaultResult} alt="" />
+                                        <h3 className="heading2">
+                                            {playlist.name}
+                                        </h3>
+                                        <div>
+                                            <p className="textSmall uppercase">
+                                                playlist
+                                            </p>
+                                            <p className="textSmall uppercase">
+                                                {playlist.tracks.total} items
+                                            </p>
+                                        </div>
+                                    </Link>
+                                ))}
+                            {playlists.filter((playlist) =>
+                                playlist.name
+                                    .toLowerCase()
+                                    .includes(searchQuery.toLowerCase())
+                            ).length === 0 && (
+                                <Link>
+                                    <img src={DefaultResult} alt="" />
 
-                            <h3 className="heading2">No meditation found</h3>
-                        </Link>
-                    )}
-                </div>
-            </article>
-            <Navigation />
+                                    <h3 className="heading2">
+                                        No meditation found
+                                    </h3>
+                                </Link>
+                            )}
+                        </div>
+                    </article>
+                    <Navigation />
+                </>
+            )}
         </section>
     );
 };
