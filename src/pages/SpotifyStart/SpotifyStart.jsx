@@ -63,15 +63,7 @@ const SpotifyStart = () => {
     }, [code]);
 
     if (loading) {
-        return (
-            <div>
-                <div className="lds-ripple">
-                    <div></div>
-                    <div></div>
-                </div>
-                <Navigation />
-            </div>
-        );
+        return null;
     }
 
     if (accessToken) {
