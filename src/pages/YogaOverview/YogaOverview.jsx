@@ -185,7 +185,8 @@ const YogaOverview = () => {
                             <div>
                                 <h3 className="heading2">Daily Calm</h3>
                                 <p className="textSmall uppercase">
-                                    {monthNames[month]} {day} • pause practice
+                                    {monthNames[month - 1]} {day} • pause
+                                    practice
                                 </p>
                             </div>
                             <img src={DailyCalmPlay} alt="play button" />

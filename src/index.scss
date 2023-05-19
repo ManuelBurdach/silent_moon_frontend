@@ -100,10 +100,8 @@ a {
 }
 
 .homeVideos {
-    padding-left: 5%;
-
     h2 {
-        margin-bottom: 5%;
+        margin: 0 0 5% 5%;
     }
 
     div {
@@ -115,6 +113,7 @@ a {
         -ms-overflow-style: none;
         scrollbar-width: none;
         height: 21vh;
+        padding: 0 5% 5% 5%;
 
         a {
             width: 35vw;

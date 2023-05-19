@@ -21,8 +21,8 @@ const PLAYLIST_IDS = [
     "37i9dQZF1DX1tuUiirhaT3",
     "0yCMKirBx8uUV9vmBBjTH8",
     "37i9dQZF1DXb7eLtQI7KhP",
-    "7fClwWyhkvSEziZzCLNXuq",
-    "37i9dQZF1DXcrbQpZuKaRH",
+    "4yJBBnNg20wh1pRTySqVj2?si=2e553e7c2fb64fbf",
+    "37i9dQZF1DWVS1recTqXhf?si=dba03f9e2000485b",
 ];
 
 const MeditationOverview = () => {

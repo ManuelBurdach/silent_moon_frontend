@@ -158,7 +158,15 @@ const MeditationDetails = ({ accessToken, id }) => {
     };
 
     if (loading) {
-        return <p>Loading...</p>;
+        return (
+            <>
+                <div className="lds-ripple">
+                    <div></div>
+                    <div></div>
+                </div>
+                <Navigation />
+            </>
+        );
     }
 
     return (

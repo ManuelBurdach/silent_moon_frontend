@@ -1,6 +1,12 @@
 #userProfile {
-    h1 {
-        margin: 25% 0 15% 5%;
+    #userProfileHeader {
+        h1 {
+            margin: 25% 0 3% 5%;
+        }
+
+        p {
+            margin: 0 0 10% 5%;
+        }
     }
     form {
         width: 100%;
@@ -30,9 +36,5 @@
         background-repeat: no-repeat;
         background-position: center;
         background-size: contain;
-    }
-
-    div {
-        margin-bottom: 5%;
     }
 }

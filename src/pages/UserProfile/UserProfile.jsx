@@ -82,18 +82,25 @@ const UserProfile = () => {
             .catch((error) => {
                 console.error("Error fetching playlists:", error);
             });
-    }, [accessToken, isLoading]);
+    }, [accessToken]);
+
+    console.log(isLoading);
 
     if (isLoading) {
-        return <div>Loading...</div>; // or any loading indicator/component
+        <div className="lds-ripple">
+            <div></div>
+            <div></div>
+        </div>;
     }
 
     return (
         <section id="userProfile">
             <h4 className="logo">SILENT MOON</h4>
 
-            <h1 className="heading1">Hi {user.firstName}!</h1>
-
+            <article id="userProfileHeader">
+                <h1 className="heading1">Hi {user.firstName}!</h1>
+                <p className="textSmall">Find your favorite content here. </p>
+            </article>
             <form>
                 <input
                     type="text"
