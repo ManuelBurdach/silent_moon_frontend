@@ -82,7 +82,7 @@ const UserProfile = () => {
             .catch((error) => {
                 console.error("Error fetching playlists:", error);
             });
-    }, [accessToken]);
+    }, [accessToken, favoriteVideos]);
 
     console.log(isLoading);
 
