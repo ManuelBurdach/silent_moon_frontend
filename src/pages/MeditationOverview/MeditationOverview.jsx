@@ -53,7 +53,6 @@ const MeditationOverview = () => {
     const setUser = userState((state) => state.setUser);
 
     useEffect(() => {
-        // API Access Token
         var authParameters = {
             method: "POST",
             headers: {
